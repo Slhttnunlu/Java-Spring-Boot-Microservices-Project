@@ -61,9 +61,15 @@ pipeline {
         }
     }
     post {
+        success {
+            script {
+                slackSend channel: '#class-chat', message: 'manuel-qa pipeline succes', teamDomain: 'devops14tr', tokenCredentialId: 'slack'
+            }       
+        }
         always {
             echo 'Deleting all local images'
             sh 'docker image prune -af'
         }
     }
 }
+
